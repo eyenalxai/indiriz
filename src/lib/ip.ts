@@ -1,17 +1,7 @@
 import type { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers"
 
 export const getUserIp = (headersList: ReadonlyHeaders) => {
-	const ipHeaderKeys = [
-		"x-real-ip",
-		"x-forwarded-for",
-		"cf-connecting-ip",
-		"fastly-client-ip",
-		"true-client-ip",
-		"x-cluster-client-ip",
-		"x-forwarded",
-		"forwarded-for",
-		"forwarded"
-	]
+	const ipHeaderKeys = ["cf-connecting-ip", "x-forwarded-for"]
 
 	for (const key of ipHeaderKeys) {
 		const value = headersList.get(key)
