@@ -1,11 +1,13 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { copyToClipboard } from "@/lib/clipboard"
 import { cn } from "@/lib/utils"
 import { AnimatePresence, motion } from "framer-motion"
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
 import type { ComponentProps } from "react"
+import { toast } from "sonner"
 
 type CopyButtonProps = {
 	text: string
@@ -20,22 +22,22 @@ export const CopyButton = ({
 }: CopyButtonProps) => {
 	const [copied, setCopied] = useState(false)
 
-	const handleCopy = async () => {
-		if (copied) return
-
-		await navigator.clipboard.writeText(text)
-		setCopied(true)
-
-		setTimeout(() => {
-			setCopied(false)
-		}, 1000)
-	}
-
 	return (
 		<Button
 			variant={variant}
 			size={size}
-			onClick={handleCopy}
+			onClick={() =>
+				copyToClipboard(text).match(
+					() => {
+						setCopied(true)
+						toast.success("Copied to clipboard")
+						setTimeout(() => {
+							setCopied(false)
+						}, 1000)
+					},
+					(e) => toast.error(e)
+				)
+			}
 			className={cn(className, "cursor-pointer")}
 			aria-label={copied ? "Copied" : "Copy to clipboard"}
 			{...props}
