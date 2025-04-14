@@ -23,7 +23,7 @@ export default async function Index() {
 			)}
 			<div className={cn("flex", "items-center", "gap-x-2")}>
 				<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
-				{userIp && <CopyButton variant="ghost" text={userIp} />}
+				{userIp && <CopyButton variant={"ghost"} text={userIp} />}
 			</div>
 		</div>
 	)

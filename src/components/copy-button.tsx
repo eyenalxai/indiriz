@@ -4,25 +4,18 @@ import { Button } from "@/components/ui/button"
 import { AnimatePresence, motion } from "framer-motion"
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
+import type { ComponentProps } from "react"
 
 type CopyButtonProps = {
 	text: string
-	variant?:
-		| "default"
-		| "destructive"
-		| "outline"
-		| "secondary"
-		| "ghost"
-		| "link"
-	size?: "default" | "sm" | "lg" | "icon"
-	className?: string
-}
+} & Omit<ComponentProps<typeof Button>, "onClick">
 
 export const CopyButton = ({
 	text,
 	variant = "outline",
 	size = "icon",
-	className
+	className,
+	...props
 }: CopyButtonProps) => {
 	const [copied, setCopied] = useState(false)
 
@@ -44,6 +37,7 @@ export const CopyButton = ({
 			onClick={handleCopy}
 			className={className}
 			aria-label={copied ? "Copied" : "Copy to clipboard"}
+			{...props}
 		>
 			<AnimatePresence mode="wait" initial={false}>
 				{copied ? (
