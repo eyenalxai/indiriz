@@ -1,0 +1,73 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { AnimatePresence, motion } from "framer-motion"
+import { Check, Copy } from "lucide-react"
+import { useState } from "react"
+
+type CopyButtonProps = {
+	text: string
+	variant?:
+		| "default"
+		| "destructive"
+		| "outline"
+		| "secondary"
+		| "ghost"
+		| "link"
+	size?: "default" | "sm" | "lg" | "icon"
+	className?: string
+}
+
+export const CopyButton = ({
+	text,
+	variant = "outline",
+	size = "icon",
+	className
+}: CopyButtonProps) => {
+	const [copied, setCopied] = useState(false)
+
+	const handleCopy = async () => {
+		if (copied) return
+
+		await navigator.clipboard.writeText(text)
+		setCopied(true)
+
+		setTimeout(() => {
+			setCopied(false)
+		}, 1000)
+	}
+
+	return (
+		<Button
+			variant={variant}
+			size={size}
+			onClick={handleCopy}
+			className={className}
+			aria-label={copied ? "Copied" : "Copy to clipboard"}
+		>
+			<AnimatePresence mode="wait" initial={false}>
+				{copied ? (
+					<motion.div
+						key="check"
+						initial={{ y: 10, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						exit={{ y: -10, opacity: 0 }}
+						transition={{ duration: 0.2 }}
+					>
+						<Check />
+					</motion.div>
+				) : (
+					<motion.div
+						key="copy"
+						initial={{ y: 10, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						exit={{ y: -10, opacity: 0 }}
+						transition={{ duration: 0.2 }}
+					>
+						<Copy />
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</Button>
+	)
+}

@@ -1,8 +1,9 @@
+import { CopyButton } from "@/components/copy-button"
 import { getUserCountryName, getUserIp } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import { headers } from "next/headers"
 
-export default async function Home() {
+export default async function Index() {
 	const headersList = await headers()
 	const userIp = getUserIp(headersList)
 	const userCountry = getUserCountryName(headersList)
@@ -20,7 +21,10 @@ export default async function Home() {
 			{userCountry && (
 				<h2 className={cn("font-semibold", "text-xl")}>{userCountry}</h2>
 			)}
-			<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
+			<div className={cn("flex", "items-center", "gap-x-2")}>
+				<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
+				{userIp && <CopyButton variant="ghost" text={userIp} />}
+			</div>
 		</div>
 	)
 }
