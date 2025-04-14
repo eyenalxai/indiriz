@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { AnimatePresence, motion } from "framer-motion"
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
@@ -35,7 +36,7 @@ export const CopyButton = ({
 			variant={variant}
 			size={size}
 			onClick={handleCopy}
-			className={className}
+			className={cn(className, "cursor-pointer")}
 			aria-label={copied ? "Copied" : "Copy to clipboard"}
 			{...props}
 		>
