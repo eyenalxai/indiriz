@@ -21,10 +21,16 @@ export default async function Index() {
 			{userCountry && (
 				<h2 className={cn("font-semibold", "text-xl")}>{userCountry}</h2>
 			)}
-			<div className={cn("flex", "items-center", "gap-x-2")}>
-				<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
-				{userIp && <CopyButton variant={"ghost"} text={userIp} />}
-			</div>
+			{userIp ? (
+				<div className={cn("flex", "items-center", "gap-x-2")}>
+					<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
+					<CopyButton variant={"ghost"} text={userIp} />
+				</div>
+			) : (
+				<h1 className={cn("font-semibold", "text-2xl")}>
+					Failed to get IP address
+				</h1>
+			)}
 		</div>
 	)
 }
