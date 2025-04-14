@@ -1,4 +1,4 @@
-import { getUserCountryCode, getUserCountryName, getUserIp } from "@/lib/data"
+import { getUserCountryName, getUserIp } from "@/lib/data"
 import { cn } from "@/lib/utils"
 import { headers } from "next/headers"
 
