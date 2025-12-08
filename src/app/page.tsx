@@ -18,10 +18,10 @@ export default async function Index() {
 				"gap-y-2"
 			)}
 		>
-			{userCountry && (
+			{userCountry !== null && userCountry !== "" && (
 				<h2 className={cn("font-semibold", "text-xl")}>{userCountry}</h2>
 			)}
-			{userIp ? (
+			{userIp !== null && userIp !== "" ? (
 				<div className={cn("flex", "items-center", "gap-x-2")}>
 					<h1 className={cn("font-semibold", "text-2xl")}>{userIp}</h1>
 					<CopyButton variant={"ghost"} text={userIp} />

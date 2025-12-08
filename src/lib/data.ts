@@ -7,7 +7,7 @@ export const getUserIp = (headersList: Headers) => {
 
 	for (const key of ipHeaderKeys) {
 		const value = headersList.get(key)
-		if (value) return value.split(",")[0].trim()
+		if (value !== null && value !== "") return value.split(",")[0].trim()
 	}
 
 	return null
@@ -24,6 +24,7 @@ export const getCountryName = (countryCode: string) => {
 
 export const getUserCountryName = (headersList: Headers) => {
 	const countryCode = getUserCountryCode(headersList)
-	if (countryCode) return getCountryName(countryCode)
+	if (countryCode !== null && countryCode !== "")
+		return getCountryName(countryCode)
 	return null
 }
