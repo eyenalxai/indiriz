@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from "motion/react"
 import type { ComponentProps } from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { toastManager } from "@/components/ui/toast"
 import { copyToClipboard } from "@/lib/clipboard"
 import { cn } from "@/lib/utils"
-import { toastManager } from "./ui/toast"
 
 type CopyButtonProps = {
 	text: string
