@@ -40,7 +40,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		>
 			<body className={cn("font-sans", "antialiased")}>
 				<Providers attribute="class" defaultTheme="system" enableSystem>
-					{children}
+					<main
+						className={cn(
+							"container",
+							"mx-auto",
+							"max-w-screen-sm",
+							"mt-24",
+							"px-4"
+						)}
+					>
+						{children}
+					</main>
 				</Providers>
 			</body>
 		</html>
